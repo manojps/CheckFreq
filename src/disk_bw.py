@@ -9,6 +9,7 @@ def get_storage_bandwidth(disk="/datadrive/mnt2"):
     if str_bw is not None:
         return str_bw
     else:
+        disk="/datadrive/mnt"
         paths = disk.split('/')
         print(paths)
         mnt_paths = [s for s in paths if s.startswith("mnt")]
@@ -31,8 +32,10 @@ def get_storage_bandwidth(disk="/datadrive/mnt2"):
         p = subprocess.Popen(dev_bw, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         out, err = p.communicate()  
         result = out.decode('utf-8') 
-        print(result, err.decode('utf-8')) 
-        str_bw = result.split()[-2]  
+        print(result, err.decode('utf-8'))
+        print("result", type(result)) 
+        str_bw = result.split() 
+        print("str_bw", type(str_bw), str_bw)
         os.environ['STR_BW'] = str_bw 
         with open(str_bw_file, 'w+') as wf: 
             wf.write(str_bw) 
