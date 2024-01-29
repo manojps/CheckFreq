@@ -9,33 +9,34 @@ def get_storage_bandwidth(disk="/datadrive/mnt2"):
     if str_bw is not None:
         return str_bw
     else:
-        disk="/datadrive/mnt"
-        paths = disk.split('/')
-        print(paths)
-        mnt_paths = [s for s in paths if s.startswith("mnt")]
-        print(mnt_paths)
-        disk = mnt_paths[0]
-        dev_cmd = ['grep', disk, '/proc/mounts']  
-        dev_cmd_cut = ['cut', '-d', ' ', '-f', '1'] 
-        p = subprocess.Popen(dev_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        output = subprocess.check_output(dev_cmd_cut, stdin=p.stdout) 
-        p.wait()
-        print("Output = {}".format(output))
-        if p.returncode != 0: 
-            out, err = p.communicate()
-            print("Error : {}".format(err.decode('utf-8'))) 
-            return 0,0  
-        device = output.decode('utf-8').rstrip()  
-        print("Measuring bandwidth of storage dev  {}".format(device))
-        dev_bw = ['hdparm', '-t', device] 
-        #dev_bw = ['sudo', 'hdparm', '-t', device] 
-        p = subprocess.Popen(dev_bw, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        out, err = p.communicate()  
-        result = out.decode('utf-8') 
-        print(result, err.decode('utf-8'))
-        print("result", type(result)) 
-        str_bw = result.split() 
-        print("str_bw", type(str_bw), str_bw)
+        # # disk="/datadrive/mnt"
+        # paths = disk.split('/')
+        # print(paths)
+        # mnt_paths = [s for s in paths if s.startswith("mnt")]
+        # print(mnt_paths)
+        # disk = mnt_paths[0]
+        # dev_cmd = ['grep', disk, '/proc/mounts']  
+        # dev_cmd_cut = ['cut', '-d', ' ', '-f', '1'] 
+        # p = subprocess.Popen(dev_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        # output = subprocess.check_output(dev_cmd_cut, stdin=p.stdout) 
+        # p.wait()
+        # print("Output = {}".format(output))
+        # if p.returncode != 0: 
+        #     out, err = p.communicate()
+        #     print("Error : {}".format(err.decode('utf-8'))) 
+        #     return 0,0  
+        # device = output.decode('utf-8').rstrip()  
+        # print("Measuring bandwidth of storage dev  {}".format(device))
+        # dev_bw = ['hdparm', '-t', device] 
+        # #dev_bw = ['sudo', 'hdparm', '-t', device] 
+        # p = subprocess.Popen(dev_bw, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        # out, err = p.communicate()
+        # result = out.decode('utf-8') 
+        # print(result, err.decode('utf-8'))
+        # print("result", type(result)) 
+        # str_bw = result.split() 
+        # print("str_bw", type(str_bw), str_bw)
+        str_bw = '129.00'
         os.environ['STR_BW'] = str_bw 
         with open(str_bw_file, 'w+') as wf: 
             wf.write(str_bw) 
