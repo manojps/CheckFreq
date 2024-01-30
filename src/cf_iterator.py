@@ -326,8 +326,8 @@ class CFIterator:
 		# do synchronous GPU snapshot
 		if self._chk_size < self._avg_free_mem:
 			# Use multi-proc by default
-			t_gt, t_ft = self._cf_manager.save(profile_full=True, use_thread=True)
-			t_gp, t_fp = self._cf_manager.save(profile_full=True, use_thread=False)
+			t_gt, t_ft = self._cf_manager.save_cpu(profile_full=True, use_thread=True)
+			t_gp, t_fp = self._cf_manager.save_cpu(profile_full=True, use_thread=False)
 
 			if t_fp <= t_ft:
 					t_f = t_fp
@@ -344,7 +344,7 @@ class CFIterator:
 
 			if overhead >= t_g:
 					# Use GPU-snapshot
-					self._chk_fn = getattr(self._cf_manager, "save")
+					self._chk_fn = getattr(self._cf_manager, "save_cpu")
 					#self._use_thread = True
 					#self._use_thread = False
 					overhead = t_g
