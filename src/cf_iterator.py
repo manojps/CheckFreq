@@ -138,13 +138,14 @@ class CFIterator:
 	def get_chk_fn_str(self):
 		if self._chk_fn == getattr(self._cf_manager, "save_cpu"):
 			return "cpu"
-		return "gpu"	
+		# return "gpu"	
+		return "gpu"
 
 	def populate_chk_fn(self, dev):
-		if dev == "cpu":
+		# if dev == "cpu":
 			self._chk_fn = getattr(self._cf_manager, "save_cpu")
-		else:
-			self._chk_fn = getattr(self._cf_manager, "save")
+		# else:
+		# 	self._chk_fn = getattr(self._cf_manager, "save")
 		
 
 		
