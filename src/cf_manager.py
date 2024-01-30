@@ -168,7 +168,7 @@ class CFManager:
 						chk_fname_link = self.chk_prefix + str(self.chk_global_id) + '_' +str(epoch) 
 						filepath_link = self._get_full_path(chk_fname, epoch=True)
 
-				self.logger.info("Writing chk {} at {}".format(self.chk_global_id, filepath))
+				self.logger.info("SAVE Writing chk {} at {}".format(self.chk_global_id, filepath))
 
 
 				if synchronous:
@@ -276,7 +276,7 @@ class CFManager:
 						chk_fname_link = self.chk_prefix + str(self.chk_global_id) + '_' +str(epoch) 
 						filepath_link = self._get_full_path(chk_fname, epoch=True)
 
-				self.logger.info("Writing chk {} at {}".format(self.chk_global_id, filepath))
+				self.logger.info("SAVE_CPU Writing chk {} at {}".format(self.chk_global_id, filepath))
 
 				# Check if there's an ongoing checkpoint operation
 				if self.chk_process is not None:
